@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Timers;
 
 namespace Snake
 {
@@ -11,8 +12,46 @@ namespace Snake
         static void Main(string[] args)
         {
             // поле 
-            int n = 10;
-            int m = 10;
+            int n = 0, m = 0;
+            // Уровень сложности 
+            Console.SetCursorPosition(50, 5);
+            Console.WriteLine("Select difficulty");
+            Console.SetCursorPosition(50, 6);
+            Console.ForegroundColor = ConsoleColor.Cyan;
+            Console.WriteLine("1) Easy - [Field Size 10х10, Slow speed]");
+            Console.SetCursorPosition(50, 7);
+            Console.ForegroundColor = ConsoleColor.DarkMagenta;
+            Console.WriteLine("2) Normal - [Field Size 15х15, Average speed]");
+            Console.SetCursorPosition(50, 8);
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine("3) Hard - [Field Size 20х20, Fast speed]");
+            Console.SetCursorPosition(65, 10);
+            Console.ForegroundColor = ConsoleColor.Blue;
+            Console.Write("Выбор: ");
+            int IdOfComplexity = Convert.ToInt32(Console.ReadLine());
+
+            switch (IdOfComplexity)
+            {
+                case 1:
+                    n = 10;
+                    m= 10;              
+                    Console.Clear();
+                    break;
+                case 2:
+                    n = 15;
+                    m = 15;
+                    Console.Clear();
+                    break;
+                case 3:
+                    n = 20;
+                    m = 20;
+                    Console.Clear();
+                    break;
+                default:
+                    Console.WriteLine("Id does not exist");
+                    Console.WriteLine("Game Over");
+                    break;
+            }
             // фрукт
             int xz = 0, yz = 0, xv = 0, yv = 0, size = 1;
 
@@ -60,6 +99,7 @@ namespace Snake
                 Game.Win(n, m, map, ref game);
                 System.Threading.Thread.Sleep(400);
             }
+            Console.ReadKey();
         }
     }
 }
