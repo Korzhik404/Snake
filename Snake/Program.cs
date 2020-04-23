@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Timers;
 
@@ -13,18 +14,20 @@ namespace Snake
         {
             // поле 
             int n = 0, m = 0;
+            Console.SetCursorPosition(20, 5);
+            Console.WriteLine("Управление стрелочками");
             // Уровень сложности 
             Console.SetCursorPosition(50, 5);
-            Console.WriteLine("Select difficulty");
+            Console.WriteLine("Выберите сложность:");
             Console.SetCursorPosition(50, 6);
             Console.ForegroundColor = ConsoleColor.Cyan;
-            Console.WriteLine("1) Easy - [Field Size 10х10, Slow speed]");
+            Console.WriteLine("1) Легкая - [Размер поля 10х10, низкая скорость]");
             Console.SetCursorPosition(50, 7);
             Console.ForegroundColor = ConsoleColor.DarkMagenta;
-            Console.WriteLine("2) Normal - [Field Size 15х15, Average speed]");
+            Console.WriteLine("2) Нормальная - [Размер поля 15х15, нормальная скорость]");
             Console.SetCursorPosition(50, 8);
             Console.ForegroundColor = ConsoleColor.Red;
-            Console.WriteLine("3) Hard - [Field Size 20х20, Fast speed]");
+            Console.WriteLine("3) Сложная - [Размер поля 20х20, высокая скорость]");
             Console.SetCursorPosition(65, 10);
             Console.ForegroundColor = ConsoleColor.Blue;
             Console.Write("Выбор: ");
@@ -33,18 +36,24 @@ namespace Snake
             switch (IdOfComplexity)
             {
                 case 1:
+                    Console.SetBufferSize(200, 50);
                     n = 10;
-                    m= 10;              
+                    m= 10;
+                    Thread.Sleep(300);
                     Console.Clear();
                     break;
                 case 2:
+                    Console.SetBufferSize(200, 50);
                     n = 15;
                     m = 15;
+                    Thread.Sleep(100);
                     Console.Clear();
                     break;
                 case 3:
+                    Console.SetBufferSize(200, 50);
                     n = 20;
                     m = 20;
+                    Thread.Sleep(30);
                     Console.Clear();
                     break;
                 default:
@@ -75,6 +84,7 @@ namespace Snake
                     }
                     Console.WriteLine();
                 }
+                
                 // движение 
                 if (Console.KeyAvailable == true)
                 {
@@ -97,7 +107,8 @@ namespace Snake
                 Game.Tail(ref masx, ref masy, ref map, ref eat, ref size, xz, yz);
                 Game.Lose(n, m, masx, masy, xz, yz, ref game, size);
                 Game.Win(n, m, map, ref game);
-                System.Threading.Thread.Sleep(400);
+                Thread.Sleep(400);
+                Console.Clear();
             }
             Console.ReadKey();
         }

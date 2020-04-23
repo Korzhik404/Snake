@@ -147,6 +147,6 @@ namespace Snake
                 Console.WriteLine("You WIN!!!");
             }
         }
-
+        
     }
 }
